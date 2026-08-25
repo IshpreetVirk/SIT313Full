@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ishpreet | DEV@Deakin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="font-sans text-gray-800">
+
+    <nav class="flex gap-6 px-6 py-4 text-sm">
+        <a href="#" class="text-cyan-600 hover:text-cyan-800">About</a>
+        <a href="#work" class="text-cyan-600 hover:text-cyan-800">Work</a>
+        <a href="#" class="text-cyan-600 hover:text-cyan-800">Contact</a>
+    </nav>
+
+    <div class="relative group w-full overflow-hidden">
+        <img src="resource/banner.jpg" alt="Banner" class="w-full h-56 sm:h-72 md:h-80 object-cover">
+        <div
+            class="absolute bottom-0 left-0 w-full bg-black/60 text-white text-center py-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            Hey, I'm Ishpreet
+        </div>
+    </div>
+
+    <section class="text-center py-12 px-4">
+        <img src="resource/profile.JPG" alt="Profile" class="w-28 h-28 rounded-full object-cover mx-auto mb-6">
+        <p class="text-cyan-700">I am an independent developer focused on automation and AI tooling.</p>
+        <hr class="w-24 border-cyan-600 mx-auto my-6">
+        <h2 id="work" class="text-xl font-semibold">Here's what I've done so far</h2>
+    </section>
+
+    <section class="max-w-3xl mx-auto px-4 pb-12 space-y-8">
+        <div class="flex flex-col sm:flex-row items-center gap-6">
+            <img src="resource/project1.jpg" alt="Arduino Project"
+                class="w-full sm:w-64 h-40 object-cover rounded-md shadow">
+            <div>
+                <h3 class="font-semibold text-cyan-700">Arduino Helper Machine</h3>
+                <p class="text-sm text-gray-600">A small Arduino board project that builds a simple helpful machine
+                    using sensors and basic automation logic.</p>
+            </div>
+        </div>
+        <div class="flex flex-col sm:flex-row items-center gap-6">
+            <img src="resource/project2.png" alt="JS Calculator"
+                class="w-full sm:w-64 h-40 object-cover rounded-md shadow">
+            <div>
+                <h3 class="font-semibold text-cyan-700">JavaScript Calculator</h3>
+                <p class="text-sm text-gray-600">A small calculator built with HTML, CSS and JavaScript that takes two
+                    numbers and computes the result.</p>
+            </div>
+        </div>
+    </section>
+
+    <hr class="w-24 border-cyan-600 mx-auto my-6">
+    <h2 class="text-xl font-semibold text-center mb-8">My photos</h2>
+
+    <section class="max-w-5xl mx-auto px-4 pb-16">
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            <img src="resource/gallery1.png" alt="Gallery" class="w-full h-40 object-cover rounded-md">
+            <img src="resource/gallery2.png" alt="Gallery" class="w-full h-40 object-cover rounded-md">
+            <img src="resource/gallery3.png" alt="Gallery" class="w-full h-40 object-cover rounded-md">
+            <img src="resource/gallery4.jpg" alt="Gallery" class="w-full h-40 object-cover rounded-md">
+            <img src="resource/gallery5.jpg" alt="Gallery" class="w-full h-40 object-cover rounded-md">
+            <img src="resource/gallery6.jpg" alt="Gallery" class="w-full h-40 object-cover rounded-md">
+            <img src="resource/gallery7.jpg" alt="Gallery" class="w-full h-40 object-cover rounded-md">
+            <img src="resource/gallery8.jpg" alt="Gallery" class="w-full h-40 object-cover rounded-md">
+            <img src="resource/gallery9.jpg" alt="Gallery" class="w-full h-40 object-cover rounded-md">
+        </div>
+    </section>
+
+    <hr class="w-24 border-cyan-600 mx-auto my-6">
+
+    <section class="max-w-2xl mx-auto px-4 py-10 flex flex-col sm:flex-row items-center gap-3">
+        <p class="font-bold uppercase tracking-wide text-sm">Sign up for our daily insider</p>
+        <form id="subscribe-form" class="flex gap-2 flex-1 w-full">
+            <input type="email" id="email" placeholder="Enter your email" required
+                class="border px-3 py-2 flex-1 rounded">
+            <button type="submit" class="bg-gray-800 text-white px-4 py-2 rounded">Subscribe</button>
+        </form>
+    </section>
+    <p id="subscribe-message" class="text-center text-sm pb-6"></p>
+
+
+
+    <script>
+        document.getElementById('subscribe-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const messageEl = document.getElementById('subscribe-message');
+            try {
+                const res = await fetch('/subscribe', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+                const data = await res.json();
+                messageEl.textContent = data.message;
+            } catch (err) {
+                messageEl.textContent = 'Something went wrong';
+            }
+        });
+    </script>
+
+</body>
+
+</html>
